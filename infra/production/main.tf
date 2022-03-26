@@ -23,6 +23,7 @@ data "aws_caller_identity" "current" {}
 locals {
   default_prefix = "${var.tags.Project}-${var.tags.Environment}"
   ecr_base_uri   = "${data.aws_caller_identity.current.account_id}.dkr.ecr.ap-northeast-1.amazonaws.com"
+  region         = "ap-northeast-1"
 }
 
 module "network" {
@@ -40,7 +41,11 @@ module "network" {
 module "bastion" {
   source = "./modules/bastion/"
 
-  prefix = local.default_prefix
+  prefix       = local.default_prefix
+  region       = local.region
+  ecr_base_uri = local.ecr_base_uri
+
+  tags = var.tags
 }
 
 # module "database" {

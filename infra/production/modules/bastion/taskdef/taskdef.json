@@ -1,0 +1,15 @@
+[
+  {
+    "name": "bastion",
+    "image": "${IMAGE_PREFIX}-bastion:v1",
+    "essential": true,
+    "logConfiguration": {
+      "logDriver": "awslogs",
+      "options": {
+        "awslogs-group": "${BASTION_LOG_GROUP}",
+        "awslogs-region": "${REGION}",
+        "awslogs-stream-prefix": "ecs"
+      }
+    }
+  }
+]
