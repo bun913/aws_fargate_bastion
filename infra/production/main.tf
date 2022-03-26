@@ -28,12 +28,19 @@ locals {
 module "network" {
   source = "./modules/network/"
 
-  prefix          = local.default_prefix
-  vpc_cidr        = var.vpc_cidr
-  private_subnets = var.private_subnets
-  db_subnets      = var.db_subnets
+  prefix             = local.default_prefix
+  vpc_cidr           = var.vpc_cidr
+  private_subnets    = var.private_subnets
+  db_subnets         = var.db_subnets
+  interface_services = var.vpc_endpoint.interface
 
   tags = var.tags
+}
+
+module "bastion" {
+  source = "./modules/bastion/"
+
+  prefix = local.default_prefix
 }
 
 # module "database" {
