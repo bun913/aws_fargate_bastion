@@ -2,21 +2,13 @@
   "Version": "2012-10-17",
   "Statement": [
     {
-      "Effect": "Allow",
-      "Action": "iam:PassRole",
-      "Resource": "*",
-      "Condition": {
-        "StringEquals": { "iam:PassedToService": "ssm.amazonaws.com" }
-      }
-    },
-    {
-      "Effect": "Allow",
       "Action": [
-        "ssm:DeleteActivation",
-        "ssm:RemoveTagsFromResource",
-        "ssm:AddTagsToResource",
-        "ssm:CreateActivation"
+        "ssmmessages:CreateControlChannel",
+        "ssmmessages:CreateDataChannel",
+        "ssmmessages:OpenControlChannel",
+        "ssmmessages:OpenDataChannel"
       ],
+      "Effect": "Allow",
       "Resource": "*"
     }
   ]

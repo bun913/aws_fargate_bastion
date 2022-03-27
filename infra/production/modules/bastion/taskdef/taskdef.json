@@ -1,7 +1,7 @@
 [
   {
     "name": "bastion",
-    "image": "${IMAGE_PREFIX}-bastion:v1",
+    "image": "${IMAGE_PREFIX}-bastion:prd",
     "essential": true,
     "logConfiguration": {
       "logDriver": "awslogs",
@@ -10,6 +10,9 @@
         "awslogs-region": "${REGION}",
         "awslogs-stream-prefix": "ecs"
       }
-    }
+    },
+    "command": [
+      "tail", "-f", "/dev/null"
+    ]
   }
 ]

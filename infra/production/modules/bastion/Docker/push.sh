@@ -5,7 +5,7 @@ if [ -z "${PROJECT}" ]; then
   exit 1
 fi
 AWS_ACCOUNT_ID=$2
-INIT_TAG=v1
+INIT_TAG=prd
 ECR_BASE_URI=${AWS_ACCOUNT_ID}.dkr.ecr.ap-northeast-1.amazonaws.com
 ECR_PREFIX=${ECR_BASE_URI}/${PROJECT}
 # ログイン

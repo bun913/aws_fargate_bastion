@@ -1,3 +1,13 @@
+# 今回アプリケーションは作成しないのでBastion用にクラスターを作成する
+resource "aws_ecs_cluster" "bastion" {
+  name = "${var.prefix}-bastion-cluster"
+
+  setting {
+    name  = "containerInsights"
+    value = "enabled"
+  }
+}
+
 resource "aws_ecs_task_definition" "app" {
   family        = "${var.prefix}-task-def"
   task_role_arn = aws_iam_role.ecs_task.arn

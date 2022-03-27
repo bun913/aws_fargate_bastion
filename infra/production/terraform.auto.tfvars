@@ -36,8 +36,11 @@ vpc_endpoint = {
     # SSM SessionManagerで接続するため
     "com.amazonaws.ap-northeast-1.ssmmessages",
     "com.amazonaws.ap-northeast-1.ssm",
+    # SecretManagerから環境変数を取得するため
+    # "com.amazonaws.ap-northeast-1.secretsmanager"
   ],
-  # "gateway" : [
-  #   "com.amazonaws.ap-northeast-1.s3"
-  # ]
+  "gateway" : [
+    # ECSに必要
+    "com.amazonaws.ap-northeast-1.s3"
+  ]
 }
