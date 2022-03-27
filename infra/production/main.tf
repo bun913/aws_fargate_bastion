@@ -53,16 +53,15 @@ module "bastion" {
   tags = var.tags
 }
 
-# module "database" {
-#   source = "./modules/database/"
+module "database" {
+  source = "./modules/database/"
 
-#   prefix     = local.default_prefix
-#   vpc_id     = module.network.vpc_id
-#   subnet_ids = module.network.db_subnet_ids
-#   app_sg_id  = module.web_app.ecs_service_sg_id
-#   /* bastion_sg_id = module.bastion.bastion_sg_id */
+  prefix        = local.default_prefix
+  vpc_id        = module.network.vpc_id
+  subnet_ids    = module.network.db_subnet_ids
+  bastion_sg_id = module.bastion.bastion_sg_id
 
-#   az_names = [for sb in var.db_subnets : sb.az]
+  az_names = [for sb in var.db_subnets : sb.az]
 
-#   tags = var.tags
-# }
+  tags = var.tags
+}

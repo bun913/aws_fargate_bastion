@@ -21,3 +21,17 @@ resource "aws_subnet" "private" {
 
   tags = merge(var.tags, { "Name" : "${var.prefix}-${each.value.name}" })
 }
+
+# NATゲートウェイなしでECSを利用する場合にS3のエンドポイントが必要
+# プライベートサブネット用ルートテーブル
+resource "aws_route_table" "private" {
+  vpc_id = aws_vpc.main.id
+  tags   = merge({ "Name" : "${var.prefix}--route-private" }, var.tags)
+}
+
+# RouteTableAssociation for pribate
+resource "aws_route_table_association" "private" {
+  for_each       = { for sb in var.private_subnets : sb.name => sb }
+  subnet_id      = aws_subnet.private[each.key].id
+  route_table_id = aws_route_table.private.id
+}

@@ -17,4 +17,5 @@ aws ecs run-task --cluster "${BASE_NAME}-bastion-cluster" \
 --task-definition "${TASK_DEF}" \
 --network-configuration "${NETWORK_CONFIG}" \
 --launch-type FARGATE \
---query "tasks[0].taskArn"
+--query "tasks[0].taskArn" --output text \
+| awk '{count = split($1, arr, "/"); print arr[count]}'
